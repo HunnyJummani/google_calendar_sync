@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class HomeController < BaseController
 
   def index; end
 
@@ -16,19 +16,12 @@ class HomeController < ApplicationController
   end
 
   def stop_channel
-    client = Signet::OAuth2::Client.new(client_options)
-    calendar = Google::Apis::CalendarV3::CalendarService.new
-    calendar.authorization = client
-
-    calendar.stop_channel(
-      Google::Apis::CalendarV3::Channel.new(
-        id: session[:uuid],
-        resource_id: session[:resource_id]
-      )
-    )
+    Google::Channel.new(user_id: current_user.id).stop_event_channel(session[:uuid], session[:resource_id])
     session[:resource_id] = nil
     session[:uuid] = nil
     redirect_to root_path
+  rescue => e
+    render :index, notice: e.message
   end
 
   private

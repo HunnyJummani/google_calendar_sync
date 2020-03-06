@@ -18,6 +18,7 @@ class GoogleWebhookController < ActionController::API
     @events = Google::Events.new(user_id: current_user.id).fetch
   end
 
+  # webhook callback
   def callback
     return if user_id.blank?
 
@@ -33,7 +34,7 @@ class GoogleWebhookController < ActionController::API
   end
 
   def user_id
-    return '' if request_headers['HTTP_X_GOOG_CHANNEL_TOKEN'].blank?
+    return if request_headers['HTTP_X_GOOG_CHANNEL_TOKEN'].blank?
     JSON.parse(request_headers['HTTP_X_GOOG_CHANNEL_TOKEN'])&.dig('user_id')
   end
 
@@ -50,7 +51,7 @@ class GoogleWebhookController < ActionController::API
                       start_time: event&.start&.date_time,
                       end_time: event&.end&.date_time,
                       attendees: event&.attendees&.map(&:email),
-                    status: event.status)
+                      status: event.status)
     end
   end
 

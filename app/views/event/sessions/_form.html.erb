@@ -1,12 +1,11 @@
-<h1>Sessions#new</h1>
-
-<%= form_for @session do |f| %>
+<%= form_for(session, url: event_sessions_path) do |f| %>
+  <%= render 'shared/error_messages', resource: session %>
   <%= f.label :name, "Name" %>
   <%= f.text_field :name %>
   <br><br>
 
   <%= f.label :start_time, "Start time" %>
-  <%= f.datetime_local_field(:start_time) %>
+  <%= f.datetime_field(:start_time) %>
 
 
   <%= f.label :end_time, "End time" %>
@@ -20,4 +19,3 @@
   <%= f.submit %>
 
 <% end %>
-

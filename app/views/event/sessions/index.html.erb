@@ -14,10 +14,10 @@
         <td><%= session.start_time %></td>
         <td><%= session.end_time %></td>
         <td>
-          <%= link_to "Edit", edit_session_path(session) %>
+          <%= link_to "Edit", edit_event_session_path(session) %>
         </td>
         <td>
-          <%= link_to "Delete", session_path(session), method: :delete, data: { confirm: 'Are you sure?' } %>
+          <%= link_to "Delete", event_session_path(session), method: :delete, data: { confirm: 'Are you sure?' } %>
         </td>
       </tr>
     <% end %>

@@ -3,6 +3,6 @@
   <%= link_to "#{create_stop_channel_link_text} channel", create_or_stop_channel_path %>
   <%= link_to "Revoke Google calendar access", revoke_access_path %>
 <% else %>
-  <%= link_to "Sync Google Calendar", redirect_path %>
+  <%= link_to "Sync Google Calendar", redirect_to_google_auth_path %>
 <% end %>
 <%= link_to "Sign Out", destroy_user_session_path, method: :delete, data: { confirm: 'Are you sure?'} %>

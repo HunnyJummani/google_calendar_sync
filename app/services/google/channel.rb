@@ -22,6 +22,19 @@ module Google
       calendar.watch_event('primary', channel)
     end
 
+    def stop_event_channel(uuid, resource_id)
+      client = Signet::OAuth2::Client.new(client_options)
+      calendar = Google::Apis::CalendarV3::CalendarService.new
+      calendar.authorization = client
+
+      calendar.stop_channel(
+        Google::Apis::CalendarV3::Channel.new(
+          id: uuid,
+          resource_id: resource_id
+        )
+      )
+    end
+
     private
 
     def client_options
