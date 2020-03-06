@@ -1,0 +1,25 @@
+<h2>Events List</h2>
+
+<%= link_to "New Session", new_session_path %>
+<table>
+  <thead>
+    <th>#</th>
+    <th>Name</th>
+    <th>Attendees</th>
+    <th>Start Date/Time</th>
+    <th>End Date/Time</th>
+    <th>Status</th>
+  </thead>
+  <tbody>
+    <% @events.each_with_index do |event, index| %>
+      <tr>
+        <td><%= index + 1 %></td>
+        <td><%= event.summary %></td>
+        <td><%= event.attendees&.map(&:email) %></td>
+        <td><%= event.start.date_time&.strftime('%d-%m-%Y %H:%M') %></td>
+        <td><%= event.end.date_time&.strftime('%d-%m-%Y %H:%M') %></td>
+        <td><%= event.status %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

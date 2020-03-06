@@ -1,0 +1,11 @@
+<% if flash.present? %>
+  <% flash_mapping = { 'alert' => 'danger', 'notice' => 'success', 'success' => 'success', 'error' => 'danger' } %>
+    <% flash.each do |key, value| %>
+      <%= content_tag :div, value, class: "alert alert-#{flash_mapping[key] || key}" %>
+    <% end %>
+  <% end %>
+  <% if resource.errors.any? %>
+  <% resource.errors.full_messages.each do |message| %>
+  <%= content_tag :div, message, class: "alert alert-danger" %>
+  <% end %>
+<% end %>

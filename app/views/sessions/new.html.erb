@@ -1,0 +1,23 @@
+<h1>Sessions#new</h1>
+
+<%= form_for @session do |f| %>
+  <%= f.label :name, "Name" %>
+  <%= f.text_field :name %>
+  <br><br>
+
+  <%= f.label :start_time, "Start time" %>
+  <%= f.datetime_local_field(:start_time) %>
+
+
+  <%= f.label :end_time, "End time" %>
+  <%= f.datetime_field(:end_time) %>
+  <br><br>
+
+  <%= f.label :attendees, "Attendees" %>
+  <%= f.select :attendees, options_for_select(user_emails), {include_hidden: false}, { multiple: true, size: 5} %>
+  <br><br>
+
+  <%= f.submit %>
+
+<% end %>
+
